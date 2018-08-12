@@ -1,9 +1,9 @@
 {
     "name": "the-one-that-aligns-columns",
     "displayName": "The One That Aligns Columns",
-    "description": "When selecting or insterting from VALUES, the columns align to improve readbility.",
+    "description": "Aligns the columns in values lists in SQL statements. So you can use the supercursor to edit.",
     "version": "0.0.1",
-    "publisher": "rubrav",
+    "publisher": "Ruben Ravatsaas",
     "engines": {
         "vscode": "^1.25.0",
         "sqlops": "*"
