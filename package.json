@@ -3,7 +3,10 @@
     "displayName": "The One That Aligns Columns",
     "description": "Aligns the columns in values lists in SQL statements. So you can use the supercursor to edit.",
     "version": "0.0.1",
-    "publisher": "Ruben Ravatsaas",
+    "publisher": "RubenRavatsaas",
+    "repository": {
+        "url": "https://github.com/Ravatsaas/the-one-that-aligns-columns.git"
+    },
     "engines": {
         "vscode": "^1.25.0",
         "sqlops": "*"
