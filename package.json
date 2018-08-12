@@ -2,7 +2,7 @@
     "name": "the-one-that-aligns-columns",
     "displayName": "The One That Aligns Columns",
     "description": "Aligns the columns in values lists in SQL statements. So you can use the supercursor to edit.",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "publisher": "RubenRavatsaas",
     "icon": "icon.png",
     "repository": {
