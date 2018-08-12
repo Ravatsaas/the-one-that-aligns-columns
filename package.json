@@ -4,6 +4,7 @@
     "description": "Aligns the columns in values lists in SQL statements. So you can use the supercursor to edit.",
     "version": "0.0.1",
     "publisher": "RubenRavatsaas",
+    "icon": "icon.png",
     "repository": {
         "url": "https://github.com/Ravatsaas/the-one-that-aligns-columns.git"
     },
