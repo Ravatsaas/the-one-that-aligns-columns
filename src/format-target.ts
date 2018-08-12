@@ -62,7 +62,7 @@ export class FormatTarget {
     }
 
     private getColumns(row: string): string[] {
-        let alignableRowPattern = /,?\((.*)\),?/i;
+        let alignableRowPattern = /^\s*,?\((.*)\),?\s*$/i;
         
         var matches = row.match(alignableRowPattern);
         if(!matches) {
