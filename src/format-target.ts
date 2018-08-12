@@ -30,7 +30,7 @@ export class FormatTarget {
         this.startLineNum = activeLineNum;       
         while(true){
             let prevLineNum = this.startLineNum - 1;
-            if(prevLineNum <= 0) { 
+            if(prevLineNum < 0) { 
                 break; 
             }
        
