@@ -1,0 +1,60 @@
+{
+    "name": "the-one-that-aligns-columns",
+    "displayName": "The One That Aligns Columns",
+    "description": "When selecting or insterting from VALUES, the columns align to improve readbility.",
+    "version": "0.0.1",
+    "publisher": "rubrav",
+    "engines": {
+        "vscode": "^1.25.0",
+        "sqlops": "*"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:alignColumns.Align",
+        "onCommand:alignColumns.Compact"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "alignColumns.Align",
+                "title": "Align Columns"
+            },
+            {
+                "command": "alignColumns.Compact",
+                "title": "Compact columns"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "alignColumns.Align",
+                "key": "alt+,",
+                "mac": "option+,",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "alignColumns.Compact",
+                "key": "alt+shift+,",
+                "mac": "option+shift+,",
+                "when": "editorTextFocus"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install && node ./node_modules/sqlops/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "sqlops": "github:anthonydresser/sqlops-extension-sqlops",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
