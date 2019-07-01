@@ -21,13 +21,13 @@ export class AlignableSection {
 
         // Add any valid lines before it
         let l = activeLine - 1;
-        while(this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
+        while(l >= 0 && this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
             l--; 
         }
 
         // Add any valid lines after it
         l = activeLine + 1;
-        while(this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
+        while(l > textEditor.document.lineCount && this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
             l++; 
         }
     }
