@@ -20,7 +20,7 @@ export class AlignableLine {
         this.textLine = textLine;
 
         // TODO: Drop unnecessary captures
-        let alignableRowPattern = /^(\s*),?\((.*)\),?(.*)$/i;
+        let alignableRowPattern = /^(\s*,?)\((.*)\),?(.*)$/i;
         let match = textLine.text.match(alignableRowPattern);
 
         if(!match) {
