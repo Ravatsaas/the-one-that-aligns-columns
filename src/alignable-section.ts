@@ -27,7 +27,7 @@ export class AlignableSection {
 
         // Add any valid lines after it
         l = activeLine + 1;
-        while(l > textEditor.document.lineCount && this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
+        while(l < textEditor.document.lineCount && this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
             l++; 
         }
     }
