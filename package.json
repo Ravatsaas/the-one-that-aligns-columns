@@ -2,7 +2,7 @@
     "name": "the-one-that-aligns-columns",
     "displayName": "The One That Aligns Columns",
     "description": "Aligns the columns in values lists in SQL statements. Improves readability and makes it easier to edit the data using the multi-line cursor.",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "publisher": "RubenRavatsaas",
     "icon": "icon.png",
     "repository": {
