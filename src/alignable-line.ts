@@ -5,22 +5,20 @@ import { AlignableField } from "./alignable-field";
 
 export class AlignableLine {
 
-    public textBefore: string = '';
-    public textAfter: string = '';
     public fields: AlignableField[] = [];
     public isAlignable: boolean;
 
-    private textLine: vscode.TextLine;
-
-    public get textBeforeLength(): number {
-        return this.textBefore.length;
+    get openParenPosition() : number {
+        return this.textLine.text.indexOf('(');
     }
+
+    private textLine: vscode.TextLine;
 
     constructor(textLine: vscode.TextLine) {
         this.textLine = textLine;
 
-        // TODO: Drop unnecessary captures
-        let alignableRowPattern = /^(\s*,?)\((.*)\),?(.*)$/i;
+        // TODO: Remove unnecessary captures
+        let alignableRowPattern = /^\s*,?\s*\((.*)\),?.*$/i;
         let match = textLine.text.match(alignableRowPattern);
 
         if(!match) {
@@ -29,9 +27,7 @@ export class AlignableLine {
         }
 
         this.isAlignable = true;
-        this.textBefore = match[1];
-        this.fields = this.parseRow(match[2]);
-        this.textAfter = match[3];
+        this.fields = this.parseRow(match[1]);
     }
 
     public getFieldCount() : number {
@@ -46,15 +42,38 @@ export class AlignableLine {
         return this.fields.map(f => f.trimmedLength);
     }
 
-    public performRowEdits(edit: vscode.TextEditorEdit, newColumnWidths? : number[]) {
-        let rowStartsAt = this.textLine.text.indexOf('(');
-        let paddingBeforeStart = rowStartsAt - this.textBefore.length;
+    public performRowEdits(edit: vscode.TextEditorEdit, indentation: number, newColumnWidths? : number[]) {
+        let commaPosition = this.textLine.text.indexOf(',');
+        let indentationDiff = indentation - this.openParenPosition;
 
-        if (paddingBeforeStart > 0) {
-            edit.insert(new vscode.Position(this.textLine.lineNumber, this.textBefore.length), ' '.repeat(paddingBeforeStart));
+        // Align the indentation of each row
+        if (this.openParenPosition - commaPosition > 1)
+        {
+            // Remove any spacing between the leading comma and the opening parenthesis
+            edit.delete(
+                new vscode.Range(
+                    new vscode.Position(this.textLine.lineNumber, commaPosition + 1),
+                    new vscode.Position(this.textLine.lineNumber, this.openParenPosition)
+                )
+            );
+
+            indentationDiff -= commaPosition + 1 - this.openParenPosition;
+        }
+        if (indentationDiff > 0) {
+            // Add spaces to align
+            edit.insert(new vscode.Position(this.textLine.lineNumber, 0), ' '.repeat(indentationDiff));
+        }
+        else if (indentationDiff < 0) {
+            //Remove spaces to align
+            edit.delete(
+                new vscode.Range(
+                    new vscode.Position(this.textLine.lineNumber, 0),
+                    new vscode.Position(this.textLine.lineNumber, Math.min(Math.abs(indentationDiff), commaPosition))
+                )
+            );
         }
 
-        let fieldStartsAt = rowStartsAt + 1;
+        let fieldStartsAt = this.openParenPosition + 1;
 
         // For each field, insert or remove space before or after.
         this.fields.forEach((field, index) => {
@@ -128,7 +147,7 @@ export class AlignableLine {
                     fields.push(new AlignableField(nextValue));
                 }
                 catch(ex){
-                    console.log(ex.Message)
+                    console.log(ex.Message);
                 }
                 nextValue = '';
             } else {

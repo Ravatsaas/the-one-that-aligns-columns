@@ -35,6 +35,8 @@ export class AlignableSection {
     public alignColumns(edit: vscode.TextEditorEdit) {
         if (this.lines.length === 0) { return; }
 
+        let indentation = this.lines[0].openParenPosition;
+
         let columnWidths = new Array(this.lines[0].fields.length).fill(0);
         this.lines.forEach(line => {
             line.getColumnWidths().forEach((width, i) => {
@@ -43,15 +45,17 @@ export class AlignableSection {
         });
 
         this.lines.forEach(line => {
-            line.performRowEdits(edit, columnWidths);
+            line.performRowEdits(edit, indentation, columnWidths);
         });
     }
 
     public compactColumns(edit: vscode.TextEditorEdit) {
         if (this.lines.length === 0) { return; }
 
+        let indentation = this.lines[0].openParenPosition;
+
         this.lines.forEach(line => {
-            line.performRowEdits(edit);
+            line.performRowEdits(edit, indentation);
         });
     }
 
