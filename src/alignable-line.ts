@@ -27,7 +27,7 @@ export class AlignableLine {
             return;
         }
 
-        pattern = /(^.*)={1}|(^\s+)[/\+*-].*$/i;
+        pattern = /(^\s*)[/\+*-]|(^.*?=|(^.*?\blike\b))/i;
         match = textLine.text.match(pattern);
         if (match) {
             this.isEqualsAlignable = true;
