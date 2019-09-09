@@ -32,7 +32,7 @@ export class AlignableSection {
         }
     }
 
-    public alignColumns(edit: vscode.TextEditorEdit) {
+    public alignCommas(edit: vscode.TextEditorEdit) {
         if (this.lines.length === 0) { return; }
 
         let indentation = this.lines[0].openParenPosition;

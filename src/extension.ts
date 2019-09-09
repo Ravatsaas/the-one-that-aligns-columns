@@ -10,10 +10,10 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerTextEditorCommand(
         'alignColumns.Align',
         (textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit) => {
-            console.log("Aligning columns");
+            console.log("Aligning commas");
 
             let alignableSection = new AlignableSection(textEditor);
-            alignableSection.alignColumns(edit);
+            alignableSection.alignCommas(edit);
         }
     ));
 
