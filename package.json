@@ -17,7 +17,8 @@
     ],
     "activationEvents": [
         "onCommand:alignColumns.Align",
-        "onCommand:alignColumns.Compact"
+        "onCommand:alignColumns.Compact",
+        "onCommand:alignColumns.AlignEquals"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -29,6 +30,10 @@
             {
                 "command": "alignColumns.Compact",
                 "title": "Compact columns"
+            },
+            {
+                "command": "alignColumns.AlignEquals",
+                "title": "Align Equals Signs"
             }
         ],
         "keybindings": [
@@ -42,6 +47,12 @@
                 "command": "alignColumns.Compact",
                 "key": "alt+shift+,",
                 "mac": "option+shift+,",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "alignColumns.AlignEquals",
+                "key": "alt+=",
+                "mac": "option+=",
                 "when": "editorTextFocus"
             }
         ]

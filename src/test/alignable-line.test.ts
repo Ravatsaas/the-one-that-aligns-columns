@@ -11,7 +11,7 @@ suite("Alignable Line Tests", function () {
 
         var line = new AlignableLine(textLine.object);
 
-        assert.equal(true, line.isAlignable);
+        assert.equal(true, line.isCommaAlignable);
     });
 
     test("Constructor rejects lines without parenthesis", function() {
@@ -20,7 +20,7 @@ suite("Alignable Line Tests", function () {
 
         var line = new AlignableLine(textLine.object);
 
-        assert.equal(false, line.isAlignable);
+        assert.equal(false, line.isCommaAlignable);
     });
 
     test("Constructor detects alignable lines with comments", function() {
@@ -29,7 +29,7 @@ suite("Alignable Line Tests", function () {
 
         var line = new AlignableLine(textLine.object);
 
-        assert.equal(true, line.isAlignable);
+        assert.equal(true, line.isCommaAlignable);
         assert.equal(3, line.fields.length);
     });
 
@@ -39,7 +39,7 @@ suite("Alignable Line Tests", function () {
 
         var line = new AlignableLine(textLine.object);
 
-        assert.equal(true, line.isAlignable);
+        assert.equal(true, line.isCommaAlignable);
         assert.equal(3, line.fields.length);
     });
 
@@ -49,7 +49,7 @@ suite("Alignable Line Tests", function () {
 
         var line = new AlignableLine(textLine.object);
 
-        assert.equal(true, line.isAlignable);
+        assert.equal(true, line.isCommaAlignable);
         assert.equal(2, line.fields.length);
     });
 
@@ -59,7 +59,7 @@ suite("Alignable Line Tests", function () {
 
         var line = new AlignableLine(textLine.object);
 
-        assert.equal(true, line.isAlignable);
+        assert.equal(true, line.isCommaAlignable);
         assert.equal(2, line.fields.length);
     });
 
@@ -69,7 +69,7 @@ suite("Alignable Line Tests", function () {
 
         var line = new AlignableLine(textLine.object);
 
-        assert.equal(true, line.isAlignable);
+        assert.equal(true, line.isCommaAlignable);
         assert.equal(3, line.fields.length);
     });
 

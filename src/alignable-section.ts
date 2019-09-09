@@ -7,9 +7,9 @@ export class AlignableSection {
     private lines: AlignableLine[] = [];
 
     constructor(textEditor: vscode.TextEditor) {
-        
+
         let activeLine = textEditor.selection.active.line;
-        
+
         // Add the active line
         this.addLineIfValid(textEditor.document.lineAt(activeLine));
 
@@ -22,13 +22,13 @@ export class AlignableSection {
         // Add any valid lines before it
         let l = activeLine - 1;
         while(l >= 0 && this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
-            l--; 
+            l--;
         }
 
         // Add any valid lines after it
         l = activeLine + 1;
         while(l < textEditor.document.lineCount && this.addLineIfValid(textEditor.document.lineAt(l), this.lines[0].fields.length)) {
-            l++; 
+            l++;
         }
     }
 
@@ -45,7 +45,7 @@ export class AlignableSection {
         });
 
         this.lines.forEach(line => {
-            line.performRowEdits(edit, indentation, columnWidths);
+            line.performCommaAlignEdits(edit, indentation, columnWidths);
         });
     }
 
@@ -55,17 +55,27 @@ export class AlignableSection {
         let indentation = this.lines[0].openParenPosition;
 
         this.lines.forEach(line => {
-            line.performRowEdits(edit, indentation);
+            line.performCommaAlignEdits(edit, indentation);
+        });
+    }
+
+    public alignEqualsSigns(edit: vscode.TextEditorEdit) {
+        if (this.lines.length === 0) { return; }
+
+        let indentation = this.lines.reduce((prev, curr) =>
+            (curr.fields[0].rawLength > prev) ? curr.fields[0].rawLength : prev, 0);
+
+        this.lines.forEach(line => {
+            line.performEqualsAlignEdits(edit, indentation);
         });
     }
 
     private addLineIfValid(textLine: vscode.TextLine, expectedFieldCount?: number) : boolean {
+        let line = new AlignableLine(textLine);
+        if (!line.isCommaAlignable && !line.isEqualsAlignable) { return false; }
+        if (expectedFieldCount !== undefined && line.fields.length !== expectedFieldCount) { return false; }
 
-        let alignableLine = new AlignableLine(textLine);
-        if (!alignableLine.isAlignable) { return false; }
-        if (expectedFieldCount !== undefined && alignableLine.fields.length !== expectedFieldCount) { return false; }
-
-        this.lines.push(alignableLine);
+        this.lines.push(line);
         return true;
     }
 }
