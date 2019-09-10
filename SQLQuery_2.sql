@@ -1,5 +1,9 @@
 select
-Test = max(Price),
+ Test = max(Price),
+ Test2 =max(Price),
+
+   AnotherTestField = (min(Price),
+Test2=max(Price),
   AnotherTestField = (min(Price)
           + max(Price)) / 2
 ,ComplexTest= 100 * sum(iif(D >= 10, S, 0))

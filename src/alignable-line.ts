@@ -27,11 +27,11 @@ export class AlignableLine {
             return;
         }
 
-        pattern = /(^\s*)[/\+*-]|(^.*?=|(^.*?\blike\b))/i;
+        pattern = /(^\s*)[/\+*-]|(^.*?)=|(^.*?)\blike\b/i;
         match = textLine.text.match(pattern);
         if (match) {
             this.isEqualsAlignable = true;
-            this.fields.push(new AlignableField(match[1] || match[2]));
+            this.fields.push(new AlignableField(match[1] || match[2] || match[3]));
             return;
         }
     }
@@ -169,15 +169,15 @@ export class AlignableLine {
         return fields;
     }
 
-    public performEqualsAlignEdits(edit: vscode.TextEditorEdit, indentation: number) {
+    public performEqualsAlignEdits(edit: vscode.TextEditorEdit, indent: number, newLength: number) {
         this.fields.forEach((field) => {
 
-            let trimmed = field.value.trim();
+            let rightPadding = Math.max(newLength - field.value.trimRight().length - indent, 0);
 
             edit.replace(new vscode.Range(
                 new vscode.Position(this.textLine.lineNumber, 0),
                 new vscode.Position(this.textLine.lineNumber, field.rawLength)),
-                ' '.repeat(indentation - trimmed.length -1) + trimmed + ' '
+                ' '.repeat(indent) + field.value.trim() + ' ' + ' '.repeat(rightPadding)
             );
         });
     }

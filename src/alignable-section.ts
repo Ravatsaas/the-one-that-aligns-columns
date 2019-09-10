@@ -62,11 +62,20 @@ export class AlignableSection {
     public alignEqualsSigns(edit: vscode.TextEditorEdit) {
         if (this.lines.length === 0) { return; }
 
-        let indentation = this.lines.reduce((prev, curr) =>
-            (curr.fields[0].rawLength > prev) ? curr.fields[0].rawLength : prev, 0);
+        let indent = 0;
+        let newLength = this.lines.reduce((prev, curr) => {
+            let next = curr.fields[0].value.trimRight().length;
+
+            if (next > prev) {
+                indent = curr.fields[0].leftPadding;
+                return next;
+            } else {
+                return prev;
+            }
+        }, 0);
 
         this.lines.forEach(line => {
-            line.performEqualsAlignEdits(edit, indentation);
+            line.performEqualsAlignEdits(edit, indent, newLength);
         });
     }
 
