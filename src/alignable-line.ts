@@ -171,7 +171,7 @@ export class AlignableLine {
 
     public performEqualsAlignEdits(edit: vscode.TextEditorEdit, newLength: number) {
         this.fields.forEach((field) => {
-            let rightPadding = Math.max(newLength - field.value.trim().length, 0);
+            let rightPadding = Math.max(newLength - field.trimmedLength, 0);
 
             edit.replace(new vscode.Range(
                 new vscode.Position(this.textLine.lineNumber, 0),
