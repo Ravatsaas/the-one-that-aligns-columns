@@ -62,15 +62,8 @@ export class AlignableSection {
     public alignEqualsSigns(edit: vscode.TextEditorEdit) {
         if (this.lines.length === 0) { return; }
 
-        let newLength = this.lines.reduce((prev, curr) => {
-            let next = curr.fields[0].value.trimRight().length;
-
-            if (next > prev) {
-                return next;
-            } else {
-                return prev;
-            }
-        }, 0);
+        let newLength = this.lines.reduce((prev, curr) =>
+            (curr.fields[0].trimmedLength > prev) ? curr.fields[0].trimmedLength : prev, 0);
 
         this.lines.forEach(line => {
             line.performEqualsAlignEdits(edit, newLength);
