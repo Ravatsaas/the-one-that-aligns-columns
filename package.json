@@ -67,11 +67,11 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
-        "@types/node": "^12.7.4",
+        "@types/node": "^12.7.5",
         "sqlops": "github:anthonydresser/sqlops-extension-sqlops",
-        "tslint": "^5.8.0",
+        "tslint": "^5.20.0",
         "typemoq": "^2.1.0",
-        "typescript": "^3.6.2",
+        "typescript": "^3.6.3",
         "vscode": "^1.1.36"
     }
 }
