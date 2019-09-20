@@ -169,14 +169,14 @@ export class AlignableLine {
         return fields;
     }
 
-    public performEqualsAlignEdits(edit: vscode.TextEditorEdit, newLength: number) {
+    public performEqualsAlignEdits(edit: vscode.TextEditorEdit, newLength: number, indent: number) {
         this.fields.forEach((field) => {
             let rightPadding = Math.max(newLength - field.trimmedLength, 0);
 
             edit.replace(new vscode.Range(
                 new vscode.Position(this.textLine.lineNumber, 0),
                 new vscode.Position(this.textLine.lineNumber, field.rawLength)),
-                ' '.repeat(4) + field.value.trim() + ' ' + ' '.repeat(rightPadding)
+                ' '.repeat(indent) + field.value.trim() + ' ' + ' '.repeat(rightPadding)
             );
         });
     }
