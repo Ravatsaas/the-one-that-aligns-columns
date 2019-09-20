@@ -17,7 +17,8 @@
     ],
     "activationEvents": [
         "onCommand:alignColumns.Align",
-        "onCommand:alignColumns.Compact"
+        "onCommand:alignColumns.Compact",
+        "onCommand:alignColumns.AlignEquals"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -29,6 +30,10 @@
             {
                 "command": "alignColumns.Compact",
                 "title": "Compact columns"
+            },
+            {
+                "command": "alignColumns.AlignEquals",
+                "title": "Align Equals Signs"
             }
         ],
         "keybindings": [
@@ -43,6 +48,12 @@
                 "key": "alt+shift+,",
                 "mac": "option+shift+,",
                 "when": "editorTextFocus"
+            },
+            {
+                "command": "alignColumns.AlignEquals",
+                "key": "alt+=",
+                "mac": "option+=",
+                "when": "editorTextFocus"
             }
         ]
     },
@@ -56,11 +67,11 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
+        "@types/node": "^12.7.4",
         "sqlops": "github:anthonydresser/sqlops-extension-sqlops",
         "tslint": "^5.8.0",
         "typemoq": "^2.1.0",
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6"
+        "typescript": "^3.6.2",
+        "vscode": "^1.1.36"
     }
 }
