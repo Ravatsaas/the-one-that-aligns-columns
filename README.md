@@ -19,3 +19,20 @@ values
     (200, 2, 'hi')
 )
 ```
+
+Bonus: It also aligns equal signs:
+
+`alt+=` makes turns this:
+```
+select
+    FullName = FirstName + ' ' + LastName,
+    Age = datepart(year, current_timestamp) - YearOfBirth
+from MyTable
+```
+into this:
+```
+select
+    FullName = FirstName + ' ' + LastName,
+    Age      = datepart(year, current_timestamp) - YearOfBirth
+from MyTable
+```
