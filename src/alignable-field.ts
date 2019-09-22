@@ -20,7 +20,7 @@ export class AlignableField {
 
             this.leftPadding = leftPadding  ? leftPadding[0].length : 0;
             this.rightPadding = rightPadding ? rightPadding[0].length : 0;
-            this.trimmedLength = this.rawLength - this.leftPadding - this.rightPadding;
+            this.trimmedLength = Math.max(this.rawLength - this.leftPadding - this.rightPadding, 0);
         } else {
             this.value = '';
             this.rawLength = 0;

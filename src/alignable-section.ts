@@ -65,8 +65,10 @@ export class AlignableSection {
         let newLength = this.lines.reduce((prev, curr) =>
             (curr.fields[0].trimmedLength > prev) ? curr.fields[0].trimmedLength : prev, 0);
 
+        let indent = this.lines[0].fields[0].leftPadding;
+
         this.lines.forEach(line => {
-            line.performEqualsAlignEdits(edit, newLength);
+            line.performEqualsAlignEdits(edit, newLength, indent);
         });
     }
 
